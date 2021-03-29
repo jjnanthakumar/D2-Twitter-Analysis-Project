@@ -25,7 +25,7 @@ SECRET_KEY = '+l$^4q=4rue4x4ib$+x^z1spx=57j_wq$sn%-ux-_7r@6uk+ab'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','herokuapp.com']
+ALLOWED_HOSTS = ['localhost','nlptweets.herokuapp.com']
 
 
 # Application definition

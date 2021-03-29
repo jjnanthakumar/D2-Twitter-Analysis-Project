@@ -12,6 +12,7 @@ cryptography==3.4.7
 defusedxml==0.7.1
 Django==3.1.7
 django-allauth==0.44.0
+django-anymail==8.2
 django-chartjs==2.2.1
 django-crispy-forms==1.11.2
 gunicorn==20.1.0

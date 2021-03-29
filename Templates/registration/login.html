@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load socialaccount %}
+{% block title %}{{title}}{% endblock title %}
+{% block content %}
+<!--form area start-->
+<div class="form">
+	<!--login form start-->
+	<form class="login-form" action="" method="POST">
+		{% csrf_token %}
+		<h2>Login</h2>
+		<div class="icons">
+			<a href="{% provider_login_url 'facebook' %}"><i class="fab fa-facebook"></i></a>
+			<a href="{% provider_login_url 'google' %}"><i class="fab fa-google"></i></a>
+		</div>
+		<input type="text" name="username" value="" placeholder="Username" required>
+		<input type="password" name="password" value="" placeholder="Password" required>
+		<button type="submit" name="button">Login</button><br><br>
+		<a style="text-decoration: none;" class="text-left" href="{% url 'password-reset' %}" >Forgot Username or Password?</a>
+		<p class="options">Don't have an Account? <a href="{% url 'register' %}"> Register </a></p>
+	</form>
+	<!--login form end-->
+</div>
+<!--form area end-->
+{% endblock content %}
+
+{% block javascript %}
+<script>
+	var dataUsers = [];
+	var dataEmails = [];
+	function getUsers() {
+		axios.get('http://localhost:8000/getusers').then(
+			res => {
+				const data = res.data
+				window.dataUsers = data;
+			}
+		)
+		return window.dataUsers;
+	}
+	function getEmails() {
+		axios.get('http://localhost:8000/getemails').then(
+			res => {
+				const data = res.data
+				window.dataEmails = data;
+			}
+		)
+		return window.dataEmails;
+	}
+
+</script>
+
+{% endblock javascript %}

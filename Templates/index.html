@@ -1,0 +1,267 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+{% block title %}Data Analysis{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+<!-- Button trigger modal -->
+<form id="twitter" class="form-inline custom text-center">
+    <!-- <span class="fa fa-search"></span> -->
+    <input type="text" class="form-control custom-form" placeholder="Enter Hashtag here">
+    <button type="submit" class="analyze">Analyze</button>
+
+
+</form>
+<div style="justify-content:space-evenly !important;" class="row justify-content-center">
+    <button id="positive" style="display: none;" type="button btn-sm" class="analyze" data-toggle="modal"
+        data-target="#exampleModalCenter" onclick="setTableData('positive')">
+        <small>view positive tweets</small>
+    </button>
+    <button id="neutral" style="display: none;" type="button btn-sm" class="analyze" data-toggle="modal"
+        data-target="#exampleModalCenter" onclick="setTableData('neutral')">
+        <small>view neutral tweets</small>
+    </button>
+    <button id="negative" style="display: none;" type="button btn-sm" class="analyze" data-toggle="modal"
+        data-target="#exampleModalCenter" onclick="setTableData('negative')">
+        <small>view negative tweets</small>
+    </button>
+</div>
+<div class="row">
+
+    <div class="col-md-6">
+        <canvas style="background-color: aliceblue;display: none;padding: 20px;" id="myChartBar"></canvas>
+    </div>
+    <div class="col-md-6">
+        <canvas style="background-color: aliceblue;display: none;padding: 20px;" id="myPie"></canvas>
+    </div>
+
+</div>
+{% else %}
+<h1 class="text-center text-danger">Please Login/Register First</h1>
+<div style="justify-content: space-between ; margin: 10px; " class="text-center">
+    <a style="border-radius: 50%;font-size:200%;" href="{% url 'login' %}" role="button"
+        class="btn btn-outline-primary"><i class="fa fa-sign-in"></i></a>
+    <a style="border-radius: 50%; font-size: 200%;" href="{% url 'register' %}" role="button"
+        class="btn btn-outline-primary"><i class="fa fa-user-plus"></i></a>
+</div>
+<img style="margin-left: 30%;border-radius: 16px;" src="{% static 'twitter.gif' %}" height="70%" />
+
+{% endif %}
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-sm table-dark" id="tweet_data">
+                    <thead>
+                        <tr>
+                            <th scope="col">Profile</th>
+                            <th scope="col">User Id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Tweet</th>
+                            <th scope="col">created_at</th>
+                        </tr>
+                    </thead>
+                    <tbody id="p_widget">
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="export" type="button" class="btn btn-primary">Export to Excel</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% block javascript %}
+<script>
+    $(document).ready(function () {
+        $("#export").off().click(function () {
+            TableToExcel.convert(document.getElementById("tweet_data"), {
+                name: `TwitterData_${$('#export').attr('data-mode')}.xlsx`,
+                sheet: {
+                    name: "Sheet1"
+                }
+            });
+        });
+    });
+    function drawPieGraph(data, id) {
+        var labels = data.labels;
+        var chartLabel = data.chartLabel;
+        var chartdata = data.chartdata;
+        var canvas = document.getElementById(id)
+        var ctx = canvas.getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: chartLabel,
+                    data: chartdata,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+
+        });
+    }
+    function drawBarGraph(data, id) {
+        var labels = data.labels;
+        var chartLabel = data.chartLabel;
+        var chartdata = data.chartdata;
+        var canvas = document.getElementById(id)
+        var ctx = canvas.getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: chartLabel,
+                    data: chartdata,
+                    backgroundColor: "rgba(54, 162, 235, 0.2)",
+                    borderColor: 'rgba(255, 99, 132, 0.2)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Opinions View Chart'
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    }
+    function makeTableData(data, mode) {
+        var table_body = document.getElementById('p_widget')
+        if (mode === 'positive') {
+            var elem = document.getElementById('title')
+            elem.innerHTML = "Positive Tweets"
+            $('#export').attr('data-mode', 'positive')
+            data.map((item) => {
+                if (item.sentiment === 'positive') {
+                    var tr = table_body.insertRow();
+                    var c1 = tr.insertCell(0);
+                    var c2 = tr.insertCell(1);
+                    var c3 = tr.insertCell(2);
+                    var c4 = tr.insertCell(3);
+                    var c5 = tr.insertCell(4);
+                    var c6 = tr.insertCell(5);
+                    c1.innerHTML = `<img style="border-radius: 50%" src=${item?.user?.profile_img} width="100%" height="100%" />`
+                    c1.style = "padding: 10px"
+                    c2.innerHTML = item.user?.id.toString()
+                    c3.innerHTML = item.user?.name;
+                    c4.innerHTML = item.tweet
+                    c5.innerHTML = moment(item.created_at).fromNow();
+
+                }
+            })
+        }
+        else if (mode === 'negative') {
+            var elem = document.getElementById('title')
+            $('#export').attr('data-mode', 'negative')
+            elem.innerHTML = "Negative Tweets"
+            data.map((item) => {
+                if (item.sentiment === 'negative') {
+                    var tr = table_body.insertRow();
+                    var c1 = tr.insertCell(0);
+                    var c2 = tr.insertCell(1);
+                    var c3 = tr.insertCell(2);
+                    var c4 = tr.insertCell(3);
+                    var c5 = tr.insertCell(4);
+                    var c6 = tr.insertCell(5);
+                    c1.innerHTML = `<img style="border-radius: 50%" src=${item?.user?.profile_img} width="40%" height="40%" />`
+                    c1.style = "padding: 10px"
+                    c2.innerHTML = item.user?.id.toString()
+                    c3.innerHTML = item.user?.name;
+                    c4.innerHTML = item.tweet
+                }
+            })
+        }
+        else {
+            var elem = document.getElementById('title')
+            elem.innerHTML = "Neutral Tweets"
+            $('#export').attr('data-mode', 'neutral')
+            data.map((item) => {
+                if (item.sentiment === 'neutral') {
+                    var tr = table_body.insertRow();
+                    var c1 = tr.insertCell(0);
+                    var c2 = tr.insertCell(1);
+                    var c3 = tr.insertCell(2);
+                    var c4 = tr.insertCell(3);
+                    var c5 = tr.insertCell(4);
+                    var c6 = tr.insertCell(5);
+                    c1.innerHTML = `<img style="border-radius: 50%" src=${item?.user?.profile_img} width="40%" height="40%" />`
+                    c1.style = "padding: 10px"
+                    c2.innerHTML = item.user?.id.toString()
+                    c3.innerHTML = item.user?.name;
+                    c4.innerHTML = item.tweet
+                }
+            })
+        }
+
+    }
+    $('#twitter').on('submit', (e) => {
+        let hashtag = e.target[0].value
+        if (!hashtag.includes('#')) {
+            hashtag = '#' + hashtag;
+        }
+        e.preventDefault();
+        $.ajax({
+            url: `{% url 'analyze' %}`,
+            data: 'hashtag=' + hashtag,
+            type: 'POST',
+            success: function (result) {
+                console.log(result)
+                drawBarGraph(result, 'myChartBar')
+                drawPieGraph(result, 'myPie')
+                $('#myChartBar').show();
+                $('#myPie').show();
+                window.data = result.data_dict
+                $('#positive').show();
+                $('#negative').show();
+                $('#neutral').show();
+
+            }
+        });
+    })
+
+    var setTableData = (mode) => {
+        mode === 'positive' ? makeTableData(window.data, mode) : (mode === 'negative' ? makeTableData(window.data, mode) : makeTableData(window.data, mode))
+    }
+
+</script>
+{% endblock javascript %}
+{% endblock content %}

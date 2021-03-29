@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %}{{title}}{% endblock %}
+{% block javascript %}
+<script>
+    $(document).ready(function () {
+        const usernameHandler = (e) => {
+            console.log(e);
+        }
+    });
+    var dataUsers = [];
+    var dataEmails = [];
+    function getUsers() {
+        axios.get('http://localhost:8000/getusers').then(
+            res => {
+                const data = res.data
+                window.dataUsers = data;
+            }
+        )
+        return window.dataUsers;
+    }
+    function getEmails() {
+        axios.get('http://localhost:8000/getemails').then(
+            res => {
+                const data = res.data
+                window.dataEmails = data;
+            }
+        )
+        return window.dataEmails;
+    }
+
+</script>
+{% endblock javascript %}
+{% block content %}
+
+<body>
+    <div class="bg-image"></div>
+    <div class="form">
+        <form class="login-form" method="POST">
+            {% csrf_token %}
+            <h2>Register</h2>
+            <input type="text" name="uname" placeholder="Username" id="user" required onChange="usernameHandler(this)">
+            <input type="email" name="email" placeholder="email" required>
+            <input type="password" name="password1" placeholder="Password" required>
+            <input type="password" name="password2" placeholder="Confirm Password" required>
+            <button>Register</button>
+        </form>
+        <h3 class="options">Already Have an Account ? <a href="{% url 'login' %}"> Login </a></h3>
+    </div>
+    {% endblock content %}

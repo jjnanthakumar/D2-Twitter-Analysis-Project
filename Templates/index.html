@@ -259,6 +259,9 @@
     })
 
     var setTableData = (mode) => {
+        
+        var table_b=document.getElementById('p_widget')
+        table_b.innerHTML="";
         mode === 'positive' ? makeTableData(window.data, mode) : (mode === 'negative' ? makeTableData(window.data, mode) : makeTableData(window.data, mode))
     }
 

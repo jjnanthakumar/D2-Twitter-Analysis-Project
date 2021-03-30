@@ -41,10 +41,8 @@
         $(document).ready(function () {
             $("#msgcontainer2").delay(4200).fadeOut('slow');
             $(".fixed-top").delay(4200).fadeOut('slow');
-            var username = '{{user}}';
-            var intials = username.charAt(0) + 'T';
-            var profileImage = $('#profileImage').text(intials);
             var elem = document.getElementById('profileImage');
+            console.log(elem.src);
             if (elem.src === "http://localhost:8000/home/") {
                 elem.src = getInitials('{{user}}') || '';
             }

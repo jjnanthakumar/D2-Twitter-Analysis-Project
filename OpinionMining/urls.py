@@ -35,7 +35,7 @@ urlpatterns = [
              form_class=EmailValidationOnForgotPassword,
              template_name='password_reset.html',
              subject_template_name='password_reset_subject.txt',
-             html_email_template_name='html_password_reset_email.html'),
+             html_email_template_name='registration/html_password_reset_email.html'),
          name='password-reset'),
     path('password-reset/done/',
          auth_views.PasswordResetDoneView.as_view(

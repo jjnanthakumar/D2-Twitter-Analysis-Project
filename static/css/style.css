@@ -6,8 +6,9 @@
 body {
   padding: 0;
   margin: 0;
-  background-color: #0046d5;
+  /* background-color: #0046d5; */
 }
+
 .custom{
     padding: 20px;
     margin-top: 50px !important;
@@ -102,6 +103,11 @@ input[type='text'] {
 @media only screen and (max-width: 767px) {
     .form{
       width: 100% !important;
+    }
+    #mygif{
+      margin: 0 auto !important;
+      height: fit-content !important;
+      width: fit-content !important;
     }
 }
 

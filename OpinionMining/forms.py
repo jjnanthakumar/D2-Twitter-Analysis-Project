@@ -20,7 +20,10 @@ class EmailValidationOnForgotPassword(PasswordResetForm):
         if not response.body:
             self.add_error('email', 'Invalid Email Address :(')
         user = User.objects.get(email=email)
-        socialinfo=SocialAccount.objects.get(user=user)
+        try:
+            socialinfo=SocialAccount.objects.get(user=user)
+        except:
+            socialinfo=""
         if socialinfo.provider=='google':
             self.add_error('email', "Your email is already linked with google try to sign in using google")
         elif socialinfo.provider=='facebook':

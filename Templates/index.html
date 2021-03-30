@@ -27,15 +27,14 @@
         <small>view negative tweets</small>
     </button>
 </div>
+<br>
 <div class="row">
-
     <div class="col-md-6">
         <canvas style="background-color: aliceblue;display: none;padding: 20px;" id="myChartBar"></canvas>
     </div>
     <div class="col-md-6">
         <canvas style="background-color: aliceblue;display: none;padding: 20px;" id="myPie"></canvas>
     </div>
-
 </div>
 {% else %}
 <h1 class="text-center text-danger">Please Login/Register First</h1>
@@ -178,7 +177,6 @@
                     var c3 = tr.insertCell(2);
                     var c4 = tr.insertCell(3);
                     var c5 = tr.insertCell(4);
-                    var c6 = tr.insertCell(5);
                     c1.innerHTML = `<img style="border-radius: 50%" src=${item?.user?.profile_img} width="100%" height="100%" />`
                     c1.style = "padding: 10px"
                     c2.innerHTML = item.user?.id.toString()
@@ -201,12 +199,12 @@
                     var c3 = tr.insertCell(2);
                     var c4 = tr.insertCell(3);
                     var c5 = tr.insertCell(4);
-                    var c6 = tr.insertCell(5);
                     c1.innerHTML = `<img style="border-radius: 50%" src=${item?.user?.profile_img} width="40%" height="40%" />`
                     c1.style = "padding: 10px"
                     c2.innerHTML = item.user?.id.toString()
                     c3.innerHTML = item.user?.name;
                     c4.innerHTML = item.tweet
+                    c5.innerHTML = moment(item.created_at).fromNow();
                 }
             })
         }
@@ -222,12 +220,12 @@
                     var c3 = tr.insertCell(2);
                     var c4 = tr.insertCell(3);
                     var c5 = tr.insertCell(4);
-                    var c6 = tr.insertCell(5);
                     c1.innerHTML = `<img style="border-radius: 50%" src=${item?.user?.profile_img} width="40%" height="40%" />`
                     c1.style = "padding: 10px"
                     c2.innerHTML = item.user?.id.toString()
                     c3.innerHTML = item.user?.name;
                     c4.innerHTML = item.tweet
+                    c5.innerHTML = moment(item.created_at).fromNow();
                 }
             })
         }

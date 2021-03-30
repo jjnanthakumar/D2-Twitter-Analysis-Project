@@ -19,4 +19,7 @@ class EmailValidationOnForgotPassword(PasswordResetForm):
                 'email', 'There is no user registered with the specified email address!')
         if not response.body:
             self.add_error('email', 'Invalid Email Address :(')
+        user = User.objects.get(email=email)
+        if not user.password.strip():
+            self.add_error('email', "Your email is already linked with google/facebook")
         return email

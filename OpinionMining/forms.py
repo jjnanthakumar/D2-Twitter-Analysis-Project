@@ -3,7 +3,7 @@ from django.contrib.auth.forms import PasswordResetForm
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 
-
+from allauth.socialaccount.models import SocialAccount
 class EmailValidationOnForgotPassword(PasswordResetForm):
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -20,8 +20,9 @@ class EmailValidationOnForgotPassword(PasswordResetForm):
         if not response.body:
             self.add_error('email', 'Invalid Email Address :(')
         user = User.objects.get(email=email)
-        print(user.password)
-        print(user.email)
-        if not user.password.strip():
-            self.add_error('email', "Your email is already linked with google/facebook")
+        socialinfo=SocialAccount.objects.get(user=user)
+        print(socialinfo.provider)
+        print(socialinfo.extra_data)
+        if socialinfo.provider=='Google':
+            self.add_error('email', "Your email is already linked with google")
         return email

@@ -22,7 +22,7 @@ class EmailValidationOnForgotPassword(PasswordResetForm):
         user = User.objects.get(email=email)
         socialinfo=SocialAccount.objects.get(user=user)
         if socialinfo.provider=='google':
-            self.add_error('email', "Your email is already linked with google")
+            self.add_error('email', "Your email is already linked with google try to sign in using google")
         elif socialinfo.provider=='facebook':
-            self.add_error('email', "Your email is already linked with facebook")
+            self.add_error('email', "Your email is already linked with facebook try to sign in using google")
         return email

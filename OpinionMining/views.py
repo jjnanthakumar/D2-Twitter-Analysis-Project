@@ -38,6 +38,8 @@ def getEmaillist(request):
 def about(request):
     return render(request, 'about.html', {'title': 'About'})
 
+def privacy(request):
+    return render(request, 'privacy.html', {'title': 'Privacy Policy'})
 
 def login(request):
     if request.method == 'POST':

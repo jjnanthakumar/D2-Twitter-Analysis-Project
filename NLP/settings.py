@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'OpinionMining',
     'crispy_forms',
-    'django.contrib.sites',
+    # 'django.contrib.sites',
     'chartjs',
     'allauth',
     'allauth.account',

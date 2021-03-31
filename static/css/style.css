@@ -117,8 +117,8 @@ input[type='text'] {
   }
   #mygif{
     margin: 0 auto !important;
-    height: fit-content !important;
-    width: fit-content !important;
+    height: 50% !important;
+    width: 50% !important;
   }
   
 }

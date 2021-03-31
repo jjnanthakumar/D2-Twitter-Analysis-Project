@@ -16,10 +16,10 @@ class TwitterClient(object):
         '''
         # keys and tokens from the Twitter Dev Console
         # One App
-        consumer_key = 'JwEbbM7QzpPhjB9BxnhhLM9aJ'
-        consumer_secret = '4MeImeRZlM0TdRkyOMJbSZ8x5UowD6UKNwZP4d8mBRAkerzoPl'
-        access_token = '942033965182984193-LxNxjkm9FTdgt5AUZTjTV0OpUpoyIr5'
-        access_token_secret = 'D5F4C8JfcPCvMbGAuEhb74S8gO5TPNYioIIkVXWdbxcGP'
+        consumer_key = 'fILwZj2ySxHK4XiEwc5CMhw6P'
+        consumer_secret = 'kAJJpFeb7LCOLSfbJH7htUhjeBlrjw8aU3H1uQtUEseGVoO9nZ'
+        access_token = '1376156004316930051-pjCT0FL4sr5XQTtM6lbfPxk3nm78HM'
+        access_token_secret = 'HaMiHWAV4gawyESV8MBPAe4f9GRzo5NCtuNi3BdSp323g'
 
         # Other app
         # consumer_key = 'Gi6j24WukcYQYsgaA832VM3Sw'

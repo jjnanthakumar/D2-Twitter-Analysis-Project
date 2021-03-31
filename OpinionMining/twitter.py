@@ -92,21 +92,8 @@ class TwitterClient(object):
                              "name": data["user"]["name"],
                              "profile_img": data["user"]["profile_image_url_https"]
                              },
-                    "retweets": [
-                        {
-                            "id": data.get("retweeted_status", {}).get("id_str", ""),
-                            "created_at": data.get("retweeted_status", {}).get("created_at", ""),
-                            "tweet": data.get("retweeted_status", {}).get("text", ""),
-                            "user": {
-                                "id": data.get("retweeted_status", {}).get("user", {}).get("id_str", ""),
-                                "name": data.get("retweeted_status", {}).get("user", {}).get("name", ""),
-                                "profile_img": data.get("retweeted_status", {}).get("user", {}).get("profile_image_url_https", "")
-
-                            },
-                            "retweet_count": data.get("retweeted_status", {}).get("retweet_count", 0),
-                            "favourite_count": data.get("retweeted_status", {}).get("favourite_count", 0)
-                        }
-                    ]
+                    "retweet_count": data.get("retweeted_status", {}).get("retweet_count", 0),
+                    "favourite_count": data.get("retweeted_status", {}).get("favourite_count", 0)
                 })
                 # saving text of tweet
                 parsed_tweet['text'] = tweet.text

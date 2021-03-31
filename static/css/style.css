@@ -117,8 +117,8 @@ input[type='text'] {
   }
   #mygif{
     margin: 0 auto !important;
-    height: 50% !important;
-    width: 50% !important;
+    height: auto !important;
+    width: 100% !important;
   }
   
 }

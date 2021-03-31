@@ -53,12 +53,8 @@ class TwitterClient(object):
         # create TextBlob object of passed tweet text
         analysis = TextBlob(self.clean_tweet(tweet))
         # set sentiment
-        try:
-            print(analysis.polarity)
-            print(analysis.detect_language())
-            print(analysis.sentiment_assessments)
-        except:
-            pass
+        # print(analysis.detect_language())
+        # print(analysis.sentiment_assessments)
 
         if analysis.sentiment.polarity > 0:
             return 'positive'

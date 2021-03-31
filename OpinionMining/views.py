@@ -1,3 +1,4 @@
+from OpinionMining.models import Twitter
 from django.http.response import JsonResponse
 from django.shortcuts import render, HttpResponse, redirect
 from django.views.decorators.csrf import csrf_exempt
@@ -120,6 +121,9 @@ def analyze(request):
             "chartdata": chartdata,
         }
         twitter_data.update(data)
+        twitter_obj=Twitter()
+        twitter_obj.user = request.user
+        twitter_obj.json_data= json.dumps(twitter_data)
         return HttpResponse(json.dumps(twitter_data), content_type="application/json")
 
 

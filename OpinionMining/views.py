@@ -124,6 +124,7 @@ def analyze(request):
         twitter_obj=Twitter()
         twitter_obj.user = request.user
         twitter_obj.json_data= json.dumps(twitter_data)
+        twitter_obj.save()
         return HttpResponse(json.dumps(twitter_data), content_type="application/json")
 
 

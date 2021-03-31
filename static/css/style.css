@@ -115,6 +115,11 @@ input[type='text'] {
   .analyze {
     width: 30% !important;
   }
+  #mygif{
+    margin: 0 auto !important;
+    height: fit-content !important;
+    width: fit-content !important;
+  }
   
 }
 

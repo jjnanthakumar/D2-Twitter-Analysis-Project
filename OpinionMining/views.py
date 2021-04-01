@@ -39,8 +39,10 @@ def getEmaillist(request):
 def about(request):
     return render(request, 'about.html', {'title': 'About'})
 
+
 def privacy(request):
     return render(request, 'privacy.html', {'title': 'Privacy Policy'})
+
 
 def login(request):
     if request.method == 'POST':
@@ -121,9 +123,10 @@ def analyze(request):
             "chartdata": chartdata,
         }
         twitter_data.update(data)
-        twitter_obj=Twitter()
+        twitter_obj = Twitter()
         twitter_obj.user = request.user
-        twitter_obj.json_data= json.dumps(twitter_data)
+        twitter_obj.json_data = json.dumps(twitter_data)
+        twitter_obj.hashtag = hashtag
         twitter_obj.save()
         return HttpResponse(json.dumps(twitter_data), content_type="application/json")
 

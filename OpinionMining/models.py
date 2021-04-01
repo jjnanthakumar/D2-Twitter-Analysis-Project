@@ -5,5 +5,6 @@ from django.contrib.auth.models import User
 
 class Twitter(models.Model):
     # store images in clodinary storage or as a string
+    hashtag=models.TextField(null=False,default="")
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     json_data = models.TextField(null=False,default="{}")

@@ -26,7 +26,7 @@ SECRET_KEY = '+l$^4q=4rue4x4ib$+x^z1spx=57j_wq$sn%-ux-_7r@6uk+ab'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','nlptweets.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'nlptweets.herokuapp.com']
 
 
 # Application definition
@@ -40,7 +40,7 @@ ANYMAIL = {
     "MAILJET_SECRET_KEY": "ccf918cb63ae6043526cae90b4ee0c36",
 }
 DEFAULT_FROM_EMAIL = 'nlptweets@gmail.com'
-ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS=True
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.github',
     'anymail'
 ]
 
@@ -69,6 +70,13 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 SOCIALACCOUNT_PROVIDERS = {
+    'github': {
+        'SCOPE': [
+            'user',
+            'repo',
+            'read:org',
+        ],
+    },
     'linkedin': {
         'SCOPE': [
             'r_basicprofile',
@@ -117,7 +125,7 @@ SOCIALACCOUNT_PROVIDERS = {
 SITE_ID = 0
 # ACCOUNT_ADAPTER = 'OpinionMining.adapter.AccountAdapter'
 LOGIN_REDIRECT_URL = '/'
-SESSION_COOKIE_AGE = 12096 # apprx 3.3 hrs
+SESSION_COOKIE_AGE = 12096  # apprx 3.3 hrs
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 MIDDLEWARE = [

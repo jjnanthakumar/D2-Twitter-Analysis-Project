@@ -96,6 +96,7 @@ class TwitterClient(object):
                     "favourite_count": data.get("retweeted_status", {}).get("favourite_count", 0)
                 })
                 # saving text of tweet
+                
                 parsed_tweet['text'] = tweet.text
                 # saving sentiment of tweet
                 parsed_tweet['sentiment'] = self.get_tweet_sentiment(

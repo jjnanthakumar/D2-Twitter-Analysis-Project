@@ -80,7 +80,7 @@ SOCIALACCOUNT_PROVIDERS = {
     },
     'linkedin_oauth2': {
         'SCOPE': [
-            'r_fullprofile',
+            'r_basicprofile',
             'r_emailaddress'
         ],
         'PROFILE_FIELDS': [

@@ -78,19 +78,19 @@ SOCIALACCOUNT_PROVIDERS = {
             'read:org',
         ],
     },
-    'linkedin': {
+    'linkedin_oauth2': {
         'SCOPE': [
             'r_basicprofile',
             'r_emailaddress'
         ],
-        # 'PROFILE_FIELDS': [
-        #     'id',
-        #     'first-name',
-        #     'last-name',
-        #     'email-address',
-        #     'picture-url',
-        #     'public-profile-url',
-        # ]
+        'PROFILE_FIELDS': [
+            'id',
+            'first-name',
+            'last-name',
+            'email-address',
+            'picture-url',
+            'public-profile-url',
+        ]
     },
     'facebook': {
         'METHOD': 'oauth2',

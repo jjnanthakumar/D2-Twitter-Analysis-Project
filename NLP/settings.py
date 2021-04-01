@@ -123,7 +123,7 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
-SITE_ID = 1
+SITE_ID = 0
 # ACCOUNT_ADAPTER = 'OpinionMining.adapter.AccountAdapter'
 LOGIN_REDIRECT_URL = '/'
 SESSION_COOKIE_AGE = 12096  # apprx 3.3 hrs

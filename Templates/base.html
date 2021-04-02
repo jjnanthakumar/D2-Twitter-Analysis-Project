@@ -42,7 +42,7 @@
             $("#msgcontainer2").delay(4200).fadeOut('slow');
             $(".fixed-top").delay(4200).fadeOut('slow');
             var elem = document.getElementById('profileImage');
-            if (elem.src === "http://localhost:8000/home/" || elem.src==="https://nlptweets.herokuapp.com/home/") {
+            if (elem.src === "http://localhost:8000/home/" || elem.src==="https://nlptweets.herokuapp.com/home/" || elem.src==="https://nlptweets.herokuapp.com/None") {
                 elem.src = getInitials('{{user}}') || '';
             }
         });

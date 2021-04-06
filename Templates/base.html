@@ -155,9 +155,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link"
-                        href="{% if title != 'Login'%}{% url 'login' %}{% else %}{% url 'register' %}{% endif %}">{% if
-                        title != 'Login'%}Login{% else %}Register{% endif %}<i
-                            class="fa {% if title != 'Login'%}fa-sign-in{% else %}fa-user-plus{% endif %}"></i>
+                        href="{% if title != 'Login'%}{% url 'login' %}{% else %}{% url 'register' %}{% endif %}">{% if title != 'Login'%}Login{% else %}Register{% endif %}<i class="fa {% if title != 'Login'%}fa-sign-in{% else %}fa-user-plus{% endif %}"></i>
                     </a>
                 </li>
 

@@ -6,6 +6,12 @@
     <meta charset="UTF-8">
     <meta name="google-site-verification" content="5BaDU3C3ougJeTQQ4GDfyf33NqV9xNKfyhbX90KkJpc" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:url"
+        content="http://www.nytimes.com/2015/02/19/arts/international/when-great-minds-dont-think-alike.html" />
+    <meta property="og:title" content="Twitter Data Analysis" />
+    <meta property="og:description" content="Visualize Sentiments on Twitter real time data" />
+    <meta property="og:image"
+        content="{% static 'twitter.jpg' %}" />
     <title>{% block title %} Opinion Mining {% endblock %}</title>
 
 
@@ -25,7 +31,9 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
         crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+        integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+        crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
@@ -42,7 +50,7 @@
             $("#msgcontainer2").delay(4200).fadeOut('slow');
             $(".fixed-top").delay(4200).fadeOut('slow');
             var elem = document.getElementById('profileImage');
-            if (elem.src === "http://localhost:8000/home/" || elem.src==="https://nlptweets.herokuapp.com/home/" || elem.src==="https://nlptweets.herokuapp.com/None") {
+            if (elem.src === "http://localhost:8000/home/" || elem.src === "https://nlptweets.herokuapp.com/home/" || elem.src === "https://nlptweets.herokuapp.com/None") {
                 elem.src = getInitials('{{user}}') || '';
             }
         });
@@ -70,7 +78,7 @@
             var first, last;
             if (name && name != '') {
                 first = name[0];
-                last =  null;
+                last = null;
                 if (last) {
                     var initials = first + last;
                     context.fillText(initials.toUpperCase(), 3, 23);
@@ -147,7 +155,8 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link"
-                        href="{% if title != 'Login'%}{% url 'login' %}{% else %}{% url 'register' %}{% endif %}">{% if  title != 'Login'%}Login{% else %}Register{% endif %}<i
+                        href="{% if title != 'Login'%}{% url 'login' %}{% else %}{% url 'register' %}{% endif %}">{% if
+                        title != 'Login'%}Login{% else %}Register{% endif %}<i
                             class="fa {% if title != 'Login'%}fa-sign-in{% else %}fa-user-plus{% endif %}"></i>
                     </a>
                 </li>
@@ -162,7 +171,7 @@
                 <li class="nav-item">
                     <img id="profileImage" style="border-radius: 50%;" width="50" height="50"
                         src="{{ user.socialaccount_set.all.0.get_avatar_url }}" />
-           
+
                 </li>
             </ul>
             {% endif %}

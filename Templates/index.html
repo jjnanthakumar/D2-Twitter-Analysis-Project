@@ -238,12 +238,27 @@
         }
 
     }
+    jQuery.fn.extend({
+    spin: function () {
+        this.data("original-html", this.html());
+        var i = '<i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size:16px; margin-right:10px"></i>';
+        this.html(i + this.html());
+        this.attr("disabled", "disabled");
+    },
+    reset: function () {
+        this.html(this.data("original-html"));
+        this.attr("disabled", null);
+    }
+});
+   
     $('#twitter').on('submit', (e) => {
         let hashtag = e.target[0].value
         if (!hashtag.includes('#')) {
             hashtag = '#' + hashtag;
         }
         e.preventDefault();
+        $('#loader').css('visibility','visible')
+        document.getElementById("base").style = "opacity: 0.2";
         $.ajax({
             url: `{% url 'analyze' %}`,
             data: 'hashtag=' + hashtag,
@@ -258,7 +273,11 @@
                 $('#positive').show();
                 $('#negative').show();
                 $('#neutral').show();
-
+                document.getElementById("base").style="opacity: 1";
+                $('#loader').css('visibility','hidden')
+            },
+            error: (err)=>{
+                alert("Some Error Occurred! Please try again :(")
             }
         });
     })

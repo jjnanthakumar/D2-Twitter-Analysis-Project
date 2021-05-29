@@ -33,8 +33,6 @@ ALLOWED_HOSTS = ['localhost', 'nlptweets.herokuapp.com']
 ACCOUNT_UNIQUE_EMAIL = True
 
 EMAIL_BACKEND = "anymail.backends.mailjet.EmailBackend"
-# MAILJET_API_KEY = '853cdd57bbb3d4555bdbf947e2f68953'
-# MAILJET_API_SECRET = 'ccf918cb63ae6043526cae90b4ee0c36'
 ANYMAIL = {
     "MAILJET_API_KEY": "853cdd57bbb3d4555bdbf947e2f68953",
     "MAILJET_SECRET_KEY": "ccf918cb63ae6043526cae90b4ee0c36",

@@ -8,23 +8,21 @@
 <!-- Button trigger modal -->
 <form id="twitter" class="form-inline custom text-center">
     <!-- <span class="fa fa-search"></span> -->
-    <input type="text" class="form-control custom-form" placeholder="Enter Hashtag here">
-    <button type="submit" class="analyze">Analyze</button>
-
-
+    <input type="text" class="form-control custom-form" placeholder="Enter Hashtag here" required>
+    <button type="submit" class="analyze" id='analyze'>Analyze</button>
 </form>
 <div style="justify-content:space-evenly !important;" class="row justify-content-center">
     <button id="positive" style="display: none;" type="button btn-sm" class="analyze" data-toggle="modal"
-        data-target="#exampleModalCenter" onclick="setTableData('positive')">
-        <small>view positive tweets</small>
+        data-target="#exampleModalCenter" onclick="setTableData('positive')">   
+        <small>view positive tweets (<span class='counts' id='p_count'></span>)</small>
     </button>
     <button id="neutral" style="display: none;" type="button btn-sm" class="analyze" data-toggle="modal"
         data-target="#exampleModalCenter" onclick="setTableData('neutral')">
-        <small>view neutral tweets</small>
+        <small>view neutral tweets (<span class='counts' id='nu_count'></span>)</small>
     </button>
     <button id="negative" style="display: none;" type="button btn-sm" class="analyze" data-toggle="modal"
         data-target="#exampleModalCenter" onclick="setTableData('negative')">
-        <small>view negative tweets</small>
+        <small>view negative tweets (<span class='counts' id='ne_count'></span>)</small>
     </button>
 </div>
 <br>
@@ -238,33 +236,29 @@
         }
 
     }
-    jQuery.fn.extend({
-    spin: function () {
-        this.data("original-html", this.html());
-        var i = '<i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size:16px; margin-right:10px"></i>';
-        this.html(i + this.html());
-        this.attr("disabled", "disabled");
-    },
-    reset: function () {
-        this.html(this.data("original-html"));
-        this.attr("disabled", null);
-    }
-});
    
     $('#twitter').on('submit', (e) => {
+        $('#analyze').attr('disabled',true);
+        $('#analyze').css('cursor','not-allowed')
         let hashtag = e.target[0].value
         if (!hashtag.includes('#')) {
             hashtag = '#' + hashtag;
         }
         e.preventDefault();
         $('#loader').css('visibility','visible')
+        
         document.getElementById("base").style = "opacity: 0.2";
         $.ajax({
             url: `{% url 'analyze' %}`,
             data: 'hashtag=' + hashtag,
             type: 'POST',
             success: function (result) {
-                console.log(result)
+                var pos_count = result.data_dict.filter((item)=>item.sentiment==='positive').length
+                var neg_count = result.data_dict.filter((item)=>item.sentiment==='negative').length
+                var neu_count = result.data_dict.filter((item)=>item.sentiment==='neutral').length
+                $('#p_count').html(`${pos_count}`)
+                $('#ne_count').html(`${neg_count}`)
+                $('#nu_count').html(`${neu_count}`)
                 drawBarGraph(result, 'myChartBar')
                 drawPieGraph(result, 'myPie')
                 $('#myChartBar').show();
@@ -275,6 +269,8 @@
                 $('#neutral').show();
                 document.getElementById("base").style="opacity: 1";
                 $('#loader').css('visibility','hidden')
+                $('#analyze').removeAttr('disabled');
+                $('#analyze').css('cursor','pointer')
             },
             error: (err)=>{
                 alert("Some Error Occurred! Please try again :(")

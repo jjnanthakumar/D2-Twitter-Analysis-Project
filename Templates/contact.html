@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}{{title}}{% endblock title %}
+{% block content %}
+
+<body>
+    <div class="form" id="contact">
+        <form class="login-form" id="contactform">
+            <h2>Contact Us</h2>
+            <input type="text" name="name" placeholder="Name" id="user" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="tel" name="mobile" placeholder="Mobile" required>
+            <textarea name="msg" placeholder="Your Message here"></textarea>
+            <button>Submit</button>
+        </form>
+        <!-- <h3 class="options">Already Have an Account ? <a href="{% url 'login' %}"> Login </a></h3> -->
+        <script>
+            $('#contactform').submit((e) => {
+                e.preventDefault()
+                let name = e.target[0].value
+                let email = e.target[1].value
+                let mobile = e.target[2].value
+                let message = e.target[3].value
+                $.ajax({
+                    url: `{% url 'contact' %}`,
+                    data: 'name=' + name + '&email=' + email + '&message=' + message + '&mobile=' + mobile,
+                    type: 'POST',
+                    success: function (result) {
+                        console.log(result)
+                        if (result.success) {
+                            $('#contact').html(
+                                `<h2 style="color: green;">Contact Request</h2>
+        <br>
+        <p style="color: white;">Your request sent successfully. Please Check Your Email for further Information.</p>
+        <a style="text-decoration: none;" href="{% url 'login' %}">Back to Login Page</a>`
+                            )
+                        }
+                    },
+                    error: (err) => {
+                        alert("Some Error Occurred! Please try again :(")
+                    }
+                });
+            })
+
+
+        </script>
+    </div>
+</body>
+{% endblock content %}

@@ -105,6 +105,7 @@
             background: url('/static/bgimg4.jpg');
             background-size: cover;
         }
+
     </style>
 
 </head>
@@ -143,6 +144,9 @@
                             href="https://www.linkedin.com/in/nirmal-kumar-n-627850190/" target="_blank">Nirmal Kumar
                             N</a>
                     </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
                 </li>
 
             </ul>
@@ -207,7 +211,6 @@
         </div>
     </div>
     {% endif %}
-
     {% block content %}
 
     {% endblock content %}

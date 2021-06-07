@@ -1,3 +1,4 @@
+from nltk.util import pr
 from OpinionMining.models import Twitter
 from django.http.response import JsonResponse
 from django.shortcuts import render, HttpResponse, redirect
@@ -9,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 import json
 # Create your views here.
 from .twitter import TwitterClient
+from mailjet_rest import Client
 
 
 def handler404(request, exception):
@@ -151,3 +153,51 @@ def get_data(tag, data={}):
     data['neutral_percent'] = 100 * \
         (len(tweets) - (len(ntweets)+len(ptweets)))/len(tweets)
     return data
+
+
+@csrf_exempt
+def contact(request):
+    if request.is_ajax() and request.method == 'POST':
+        email = request.POST.get('email')
+        name = request.POST.get('name')
+        mobile = request.POST.get('mobile')
+        msg = request.POST.get('message')
+        tobereplaced = {'{email}': email, '{Name}': name,
+                        '{msg}': msg, '{mobile}': mobile}
+        with open('Templates/emailtemplate.html') as f:
+            emailtemplate = f.read()
+            for key, v in tobereplaced.items():
+                emailtemplate = emailtemplate.replace(key, v if v is not None else '')
+        api_key = "853cdd57bbb3d4555bdbf947e2f68953"
+        api_secret = "ccf918cb63ae6043526cae90b4ee0c36"
+        mailjet = Client(auth=(api_key, api_secret), version='v3.1')
+        data = {
+            'Messages': [
+                {
+                    "From": {
+                        "Email": "nlptweets@gmail.com",
+                        "Name": "NLP Analytics Team"
+                    },
+                    "To": [
+                        {
+                            "Email": "jjnanthakumar477@gmail.com",
+                            "Name": "NLP Analytics Team"
+                        }
+                    ],
+                    "Cc": [
+                        {
+                            "Email": email,
+                            "Name": name
+                        },
+
+                    ],
+                    "Subject": "NLP Twitter Analytics Contact Form Confirmation Message",
+                    "TextPart": "Greetings from NLP Twitter Analytics Team!",
+                    "HTMLPart": emailtemplate
+                }
+            ]
+        }
+        result = mailjet.send.create(data=data)
+        print(result.json())
+        return HttpResponse(json.dumps({'success': True}), content_type="application/json")
+    return render(request, 'contact.html', {'title': 'Contact Us'})

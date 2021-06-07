@@ -176,7 +176,7 @@ def contact(request):
                 {
                     "From": {
                         "Email": "nlptweets@gmail.com",
-                        "Name": "NLP Analytics Team"
+                        "Name": "NLP Twitter Analytics Team"
                     },
                     "To": [
                         {

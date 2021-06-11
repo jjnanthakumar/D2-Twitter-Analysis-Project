@@ -189,6 +189,14 @@ def contact(request):
                             "Email": email,
                             "Name": name
                         },
+                        {
+                            "Email": "nirmalkumar12720@gmail.com",
+                            "Name": "Nirmal Kumar N"
+                        },
+                        {
+                            "Email": "praveenkumaresam2900@gmail.com",
+                            "Name": "Praveen K"
+                        }
 
                     ],
                     "Subject": "NLP Twitter Analytics Contact Form Confirmation Message",

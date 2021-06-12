@@ -51,9 +51,11 @@
         $(document).ready(function () {
             $("#msgcontainer2").delay(4200).fadeOut('slow');
             $(".fixed-top").delay(4200).fadeOut('slow');
+            var checkers = ["nlptweets.herokuapp.com", "localhost:8000","127.0.0.0.1:8000"]
             var elem = document.getElementById('profileImage');
-                console.log(elem.src)
-                elem.src = getInitials('{{user}}') || '';
+            // console.log(elem.src.split('//')[1].split('/')[0])
+            if(checkers.includes(elem.src.split('//')[1].split('/')[0]))
+            elem.src = getInitials('{{user}}') || '';
         });
 
         const getInitials = function (name) {

@@ -6,8 +6,10 @@
 {% block content %}
 {% if user.is_authenticated %}
 <!-- Button trigger modal -->
+<h4 id="tag" style="background: #000; z-index: 1; font-family: 'Candara' , sans-serif; position: absolute; top: 15%; left: 50%;
+    transform: translate(-50%, -50%); width: auto; height: auto; padding: 10 25 10 25px; text-align: center; border-radius: 10px;
+    opacity: 0.92; border-radius: 16px;color: white; visibility: hidden;">About Us</h4>
 <form id="twitter" class="form-inline custom text-center">
-    <!-- <span class="fa fa-search"></span> -->
     <input id='hash' type="text" class="form-control custom-form" placeholder="Enter Hashtag here" required>
     <button type="submit" class="analyze" id='analyze'>Analyze</button>
 </form>
@@ -274,6 +276,8 @@
                 $('#analyze').removeAttr('disabled');
                 $('#analyze').css('cursor', 'pointer')
                 $('#hash').val('')
+                $('#tag').text(hashtag)
+                $('#tag').css('visibility','visible')
             },
             error: (err) => {
                 alert("Some Error Occurred! Please try again :(")

@@ -127,7 +127,7 @@
                 <li class="nav-item {% if title == 'About' %}active{% endif %}">
                     <a class="nav-link" href="{% url 'about' %}">About</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {% if title == 'Privacy Policy' %}active{% endif %}">
                     <a class="nav-link" href="{% url 'privacy' %}">Privacy Policy</a>
                 </li>
                 <li class="nav-item dropdown">
@@ -146,7 +146,7 @@
                             N</a>
                     </div>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {% if title == 'Contact Us' %}active{% endif %}">
                     <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
                 </li>
 

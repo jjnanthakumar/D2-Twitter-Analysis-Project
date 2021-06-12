@@ -52,6 +52,7 @@
             $("#msgcontainer2").delay(4200).fadeOut('slow');
             $(".fixed-top").delay(4200).fadeOut('slow');
             var elem = document.getElementById('profileImage');
+                console.log(elem.src)
                 elem.src = getInitials('{{user}}') || '';
         });
 

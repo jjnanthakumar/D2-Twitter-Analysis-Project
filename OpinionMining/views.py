@@ -62,7 +62,8 @@ def login(request):
         else:
             messages.error(request, 'Invalid Credentials')
             return redirect('login')
-
+    if request.user.is_authenticated:
+        return redirect('home')
     return render(request, 'registration/login.html', {'title': 'Login'})
 
 
@@ -88,7 +89,8 @@ def register(request):
         else:
             messages.error(request, 'Passwords does not match :(')
             return redirect('register')
-
+    elif request.user.is_authenticated:
+        return redirect('home')
     else:
         return render(request, 'register.html', {'title': 'Register'})
 
@@ -167,7 +169,8 @@ def contact(request):
         with open('Templates/emailtemplate.html') as f:
             emailtemplate = f.read()
             for key, v in tobereplaced.items():
-                emailtemplate = emailtemplate.replace(key, v if v is not None else '')
+                emailtemplate = emailtemplate.replace(
+                    key, v if v is not None else '')
         api_key = "853cdd57bbb3d4555bdbf947e2f68953"
         api_secret = "ccf918cb63ae6043526cae90b4ee0c36"
         mailjet = Client(auth=(api_key, api_secret), version='v3.1')

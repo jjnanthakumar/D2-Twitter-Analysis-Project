@@ -16,16 +16,12 @@ class TwitterClient(object):
         '''
         # keys and tokens from the Twitter Dev Console
         # One App
-        # consumer_key = 'fILwZj2ySxHK4XiEwc5CMhw6P'
-        # consumer_secret = 'kAJJpFeb7LCOLSfbJH7htUhjeBlrjw8aU3H1uQtUEseGVoO9nZ'
-        # access_token = '1376156004316930051-pjCT0FL4sr5XQTtM6lbfPxk3nm78HM'
-        # access_token_secret = 'HaMiHWAV4gawyESV8MBPAe4f9GRzo5NCtuNi3BdSp323g'
 
         # Other app
-        consumer_key = 'hZd5Z0KxzlmDyS4dOrVHJrm59'
-        consumer_secret = 't8WVpAMOrk9x9qlFRofOGMmKVQYgupNH25QTXOMt0QyVDISSUa'
-        access_token = '942033965182984193-SoLXkM5KqfXnLWJeHMqOeAu0JlJXjGc'
-        access_token_secret = 'QLA2EGxVg4TKOIeBd6YuS7RTdU1I1a8wV1tLnjoAYlH1Q'
+        consumer_key = 'YOUR CONSUMER KEY'
+        consumer_secret = 'YOUR CONSUMER SECRET'
+        access_token = 'YOUR ACCESS TOKEN'
+        access_token_secret = 'YOUR TOKEN SECRET'
 
         # attempt authentication
         try:

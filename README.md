@@ -10,6 +10,12 @@ This project is about analyzing and visualizing sentiments on Twitter Real-Time 
 
 We have developed a Full-Stack web app for the above statement using Django Framework so that the business users or anyone will sign in or signup to our web app then they can visualize sentiments on specific Hashtags.
 
+## Tech Stack
+
+**Client:** HTML5, CSS3, JavaScript, Jquery, Bootstrap4
+
+**Server:** Django, Postgres, Twitter API
+
 
 ## Features
 
@@ -27,6 +33,7 @@ We have developed a Full-Stack web app for the above statement using Django Fram
 [![MIT License](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/jjnanthakumar/D2-Twitter-Analysis-Project/tree/main/Source%20Code)
 
 
+## API Reference
 
   
 ## Deployment

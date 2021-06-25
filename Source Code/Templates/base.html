@@ -6,12 +6,11 @@
     <meta charset="UTF-8">
     <meta name="google-site-verification" content="5BaDU3C3ougJeTQQ4GDfyf33NqV9xNKfyhbX90KkJpc" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:url"
-        content="https:nlptweets.herokuapp.com" />
+    <meta property="og:url" content="https://nlptweets.herokuapp.com" />
     <meta property="og:title" content="Twitter Data Analysis" />
-    <meta property="og:description" content="Visualize Sentiments on Twitter real time data" />
-    <meta property="og:image"
-        content="{% static 'twitter.jpg' %}" />
+    <meta property="og:description" content="Visualize Sentiments and Retweet Status on Twitter real time data with different types of Authentication" />
+    <meta name="author" content="Nanthakumar J J">
+    <meta property="og:image" content="https://nlptweets.herokuapp.com{% static 'twitter.jpg' %}" />
     <title>{% block title %} Opinion Mining {% endblock %}</title>
 
 
@@ -27,6 +26,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- JS, Popper.js, and jQuery -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <!-- Added Recently -->
+    <!--  -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
@@ -41,6 +44,7 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
+    <script src="{% static 'getconfig.js' %}"/>
     {% block javascript %}
     {% endblock javascript %}
 
@@ -111,7 +115,7 @@
 
 </head>
 
-<body>
+<body class="body-for-sticky">
     <div id="base">
     <nav class="navbar navbar-expand-lg navbar-light justify-content-between" style="background-color: #e3f2fd;">
         <a class="navbar-brand" href="#"><img src="{% static 'favicon.ico' %}" width="30" height="30" /></a>
@@ -218,6 +222,42 @@
     </div>
     <div id="loader" class="spinner">
     </div>
+    <div class="spacer"></div>
+    <div class="footer-dark" id="footer">
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-3 item">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="https://jjnanthakumar.github.io">Web design</a></li>
+                        <li><a href="https://jjnanthakumar.github.io">Development</a></li>
+                        <li><a href="https://jjnanthakumar.github.io">Hosting</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 col-md-3 item">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="#">Company</a></li>
+                        <li><a href="{% url 'privacy' %}">Privacy Policy</a></li>
+
+                    </ul>
+                </div>
+                
+                <div class="col item social">
+                    <h3>Follow us on </h3>
+                    <a href="https://www.facebook.com/nanthakumar.jj.98/"><i class="icon ion-social-facebook"></i></a>
+                    <a href="https://twitter.com/nanthakumarjj"><i class="icon ion-social-twitter"></i></a>
+                    <a href="https://www.instagram.com/nanthakumarjj_17/?hl=en"><i class="icon ion-social-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/nanthakumarjj-b58335148/"><i class="icon ion-social-linkedin"></i></a>
+                </div>
+            </div>
+            <p class="copyright">Nanthakumar J J © 2021</p>
+            <p class="copyright" style="color: red">Page Last Updated : <i id="pageupd"></i></p></b></p>
+        </div>
+    </footer>
+</div>    
+    
 </body>
 
 </html>

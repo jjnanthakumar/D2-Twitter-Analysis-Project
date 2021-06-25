@@ -38,6 +38,19 @@
             id="myPie"></canvas>
     </div>
 </div>
+<div class="row" style="justify-content: space-around; margin: 3%;">
+    <div class="col-md-12">
+        <canvas style="background-color: aliceblue;display: none;padding: 10px;width: fit-content;height: fit-content;"
+            id="myLine"></canvas>
+    </div>
+</div>
+<!-- myDate -->
+<div class="row" style="justify-content: space-around; margin: 3%;">
+    <div class="col-md-12">
+        <canvas style="background-color: aliceblue;display: none;padding: 10px;width: fit-content;height: fit-content;"
+            id="myDate"></canvas>
+    </div>
+</div>
 {% else %}
 <h1 class="text-center text-danger">Please Login/Register First</h1>
 <div style="justify-content: space-between ; margin: 10px; " class="text-center">
@@ -129,6 +142,69 @@
 
         });
     }
+
+    function drawLineGraph(data, id) {
+        var labels = data.labels;
+        var tweetIds = data.data_dict.map((e) => e.id);
+        var retweetCount = data.data_dict.map((e) => e.retweet_count);
+        var favCount = data.data_dict.map((e) => e.favourite_count);
+        var canvas = document.getElementById(id)
+        var ctx = canvas.getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: tweetIds,
+                datasets: [
+                    {
+                        label: 'Favourite Count',
+                        data: favCount,
+                        borderColor: 'red',
+                        backgroundColor: 'rgba(255, 0, 0, 0.3)'
+                    },
+                    {
+                        label: 'Retweet Count',
+                        data: retweetCount,
+                        borderColor: 'blue',
+                        backgroundColor: 'rgba(0,0,255,0.3)'
+                    }
+                ]
+            },
+            options: {
+                // tooltips: {
+                //     enabled: true,
+                //     // mode: 'single',
+                //     callbacks: {
+                //         label: function (tooltipItems, data) {
+                //             var i = tooltipItems.index;
+                //             return data.labels[i] + data.datasets[0].data[i];
+                //         }
+                //     }
+                // },
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Retweet and Favourite Counts'
+                },
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            padding: 10
+                        }
+                    }],
+                    yAxes: [{
+                        stacked: true,
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            },
+        });
+    }
+
     function drawBarGraph(data, id) {
         var labels = data.labels;
         var chartLabel = data.chartLabel;
@@ -166,6 +242,64 @@
             }
         });
     }
+
+    function drawLineGraphforDate(data, id) {
+        var labels = data.labels;
+        var tweetIds = {};
+        var Ids = [];
+        var tweetDates = [];
+        data.data_dict.forEach(ele => {
+            let date = new Date(ele.created_at).toLocaleDateString();
+            if (!tweetDates.includes(date) && !Ids.includes(ele.id)) {
+                Ids.push(ele.id)
+                tweetDates.push(date)
+                tweetIds[date] = [ele.id];
+                tweetIds[date].count = 1;
+            }
+            else {
+                tweetIds[date].push(ele.id);
+                tweetIds[date].count++;
+            }
+        });
+        var tweetCounts = tweetDates.map(d => tweetIds[d].count);
+        var favCount = data.data_dict.map((e) => e.favourite_count);
+        var canvas = document.getElementById(id)
+        var ctx = canvas.getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: tweetDates,
+                datasets: [
+                    {
+                        label: 'Tweets Count',
+                        data: tweetCounts,
+                        borderColor: 'red',
+                    },
+                ]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Opinions View by Date'
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            },
+
+        });
+    }
+
+
+
     function makeTableData(data, mode) {
         var table_body = document.getElementById('p_widget')
         if (mode === 'positive') {
@@ -250,8 +384,8 @@
         }
         e.preventDefault();
         $('#loader').css('visibility', 'visible')
-
-        document.getElementById("base").style = "opacity: 0.2";
+        $('#base').css('opacity',0.2)
+        $("#footer").css('opacity', 0.2)
         $.ajax({
             url: `{% url 'analyze' %}`,
             data: 'hashtag=' + hashtag,
@@ -265,19 +399,25 @@
                 $('#nu_count').html(`${neu_count}`)
                 drawBarGraph(result, 'myChartBar')
                 drawPieGraph(result, 'myPie')
+                console.log(result)
+                drawLineGraph(result, 'myLine')
+                drawLineGraphforDate(result, 'myDate')
                 $('#myChartBar').show();
                 $('#myPie').show();
+                $('#myLine').show();
+                $('#myDate').show();
                 window.data = result.data_dict
                 $('#positive').show();
                 $('#negative').show();
                 $('#neutral').show();
-                document.getElementById("base").style = "opacity: 1";
+                $('#base').css('opacity',1)
                 $('#loader').css('visibility', 'hidden')
+                $("#footer").css('opacity', 1)
                 $('#analyze').removeAttr('disabled');
                 $('#analyze').css('cursor', 'pointer')
                 $('#hash').val('')
                 $('#tag').text(hashtag)
-                $('#tag').css('visibility','visible')
+                $('#tag').css('visibility', 'visible')
             },
             error: (err) => {
                 alert("Some Error Occurred! Please try again :(")

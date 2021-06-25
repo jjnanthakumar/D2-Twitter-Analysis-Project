@@ -14,14 +14,12 @@ class TwitterClient(object):
         ''' 
         Class constructor or initialization method. 
         '''
-        # keys and tokens from the Twitter Dev Console
-        # One App
-
+        
         # Other app
         consumer_key = 'YOUR CONSUMER KEY'
         consumer_secret = 'YOUR CONSUMER SECRET'
         access_token = 'YOUR ACCESS TOKEN'
-        access_token_secret = 'YOUR TOKEN SECRET'
+        access_token_secret = 'YOUR ACCESS SECRET'
 
         # attempt authentication
         try:
@@ -68,8 +66,8 @@ class TwitterClient(object):
         tweets = []
         try:
             # call twitter api to fetch tweets
-            fetched_tweets = self.api.search_30_day(
-                environment_name='month', query=query, maxResults=100)
+            fetched_tweets = self.api.search_full_archive( # search_full_archive # search_30_day
+                environment_name='project', query=query, maxResults=100)
             # print(json.dumps(data['retweeted_status'],indent=4))
             # parsing tweets one by one
             for tweet in fetched_tweets:
@@ -77,6 +75,7 @@ class TwitterClient(object):
                 parsed_tweet = {}
                 data = tweet._json
                 # print(json.dumps(data, indent=4))
+                # break
 
                 data_dict.append({
                     "id": data["id_str"],
@@ -89,7 +88,7 @@ class TwitterClient(object):
                              "profile_img": data["user"]["profile_image_url_https"]
                              },
                     "retweet_count": data.get("retweeted_status", {}).get("retweet_count", 0),
-                    "favourite_count": data.get("retweeted_status", {}).get("favourite_count", 0)
+                    "favourite_count": data.get("retweeted_status", {}).get("favorite_count", 0)
                 })
                 # saving text of tweet
                 

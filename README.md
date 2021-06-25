@@ -5,15 +5,18 @@
     
 # Twitter Data Analysis
 
-A brief description of what this project does and who it's for
+This project is about analyzing and visualizing sentiments on Twitter Real-Time data based on the Hashtags.
+<br/>
+
+We have developed a Full-Stack web app for the above statement using Django Framework so that the business users or anyone will sign in or signup to our web app then they can visualize sentiments on specific Hashtags.
 
 
 ## Features
 
-- Light/dark mode toggle
-- Live previews
-- Fullscreen mode
-- Cross platform
+- Authentication via Different Social Media Platforms
+- Opinion Mining
+- Advanced Visualizations
+- Exporting Tweets to Excel Sheet
 
   
 ## Badges
@@ -28,7 +31,7 @@ A brief description of what this project does and who it's for
   
 ## Deployment
 
-To deploy this project run
+To deploy this project,
 
 Deployment Steps [here](DeploymentSteps.md)
 
@@ -43,26 +46,28 @@ Insert gif or link to demo
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/jjnanthakumar/D2-Twitter-Analysis-Project.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd D2-Twitter-Analysis-Project
 ```
 
 Install dependencies
 
 ```bash
-  npm install
+  pip install -r requirements.txt
 ```
 
 Start the server
 
 ```bash
-  npm run start
+  python manage.py runserver
 ```
+
+Then visit https://localhost:8000 in your local machine.
 
   
 ## Feedback
@@ -78,6 +83,6 @@ For support, email nlptweets@gmail.com or join our Discord Server.
 ## Authors
 
 - [@jjnanthakumar](https://github.com/jjnanthakumar)
-- [@praveen](https://github.com/praveenk)
-- [@nirmal](https://github.com/nirma;)
+- [@praveen](https://github.com/praveen2900)
+- [@nirmal](https://github.com/nirmalkumar12720)
   

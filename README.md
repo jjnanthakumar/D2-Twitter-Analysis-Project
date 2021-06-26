@@ -32,6 +32,11 @@ We have developed a Full-Stack web app for the above statement using Django Fram
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/jjnanthakumar/D2-Twitter-Analysis-Project/blob/main/LICENSE)
 [![MIT License](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/jjnanthakumar/D2-Twitter-Analysis-Project/tree/main/Source%20Code)
 
+## Architecture Diagram
+<br/>
+
+![logo](media/architecture.png)
+<br/>
 
 ## API Reference
 

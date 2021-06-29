@@ -39,6 +39,16 @@ We have developed a Full-Stack web app for the above statement using Django Fram
 <br/>
 
 ## API Reference
+Replace all your twitter dev app credentials below in [twitter.py](source%20code/OpinionMining/twitter.py) file
+
+```python
+consumer_key = 'YOUR CONSUMER KEY'
+consumer_secret = 'YOUR CONSUMER SECRET'
+access_token = 'YOUR ACCESS TOKEN'
+access_token_secret = 'YOUR ACCESS SECRET'
+```
+
+Get your Access tokens from [here](https://developer.twitter.com/en/portal/apps/new)
 
   
 ## Deployment

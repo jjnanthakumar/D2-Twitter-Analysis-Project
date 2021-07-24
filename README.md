@@ -60,7 +60,9 @@ Deployment Steps [here](DeploymentSteps.md)
   
 ## Demo
 
-https://drive.google.com/file/d/1B9yxRa1uHEvfHjsOH9EuBOTVx8CQIc8F/preview?usp=sharing
+[!Watch the video](https://drive.google.com/file/d/1B9yxRa1uHEvfHjsOH9EuBOTVx8CQIc8F/preview?usp=sharing)](https://drive.google.com/file/d/1B9yxRa1uHEvfHjsOH9EuBOTVx8CQIc8F/preview?usp=sharing)
+
+[!demo](media/Project%20Demo.mp4)
 
   
 ## Run Locally

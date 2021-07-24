@@ -60,7 +60,7 @@ Deployment Steps [here](DeploymentSteps.md)
   
 ## Demo
 
-https://raw.githubusercontent.com/jjnanthakumar/D2-Twitter-Analysis-Project/main/media/Project%20Demo.mp4
+https://drive.google.com/file/d/1B9yxRa1uHEvfHjsOH9EuBOTVx8CQIc8F/view?usp=sharing
 
   
 ## Run Locally

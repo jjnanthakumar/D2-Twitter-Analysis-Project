@@ -59,10 +59,15 @@ Deployment Steps [here](DeploymentSteps.md)
 
   
 ## Demo
+<br/>
 
-[!Watch the video](https://drive.google.com/file/d/1B9yxRa1uHEvfHjsOH9EuBOTVx8CQIc8F/preview?usp=sharing)](https://drive.google.com/file/d/1B9yxRa1uHEvfHjsOH9EuBOTVx8CQIc8F/preview?usp=sharing)
+![demo](media/Project-Demo.gif)
+<br/>
 
-[!demo](media/Project%20Demo.mp4)
+[Watch in Vimeo](https://vimeo.com/578808266)
+
+
+<br/>
 
   
 ## Run Locally

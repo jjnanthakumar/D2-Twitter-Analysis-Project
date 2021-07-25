@@ -1,0 +1,11 @@
+venv
+.vscode
+__pycache__
+db.sqlite3
+temp.py
+OpinionMining/static
+OpinionMining/migrations
+temp.js
+api.rest
+node_modules
+*.json

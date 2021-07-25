@@ -1,5 +1,5 @@
 .footer-dark {
-    padding: 20px 0;
+    padding: 10px 0;
     color: black;
     width: 100%;
     background-color: #acdee7;
@@ -7,7 +7,7 @@
 }
 
 .footer-dark h3 {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     font-weight: bold;
     font-size: 16px;
 }
@@ -38,7 +38,7 @@
 }
 
 .footer-dark .item.text {
-    margin-bottom: 36px;
+    margin-bottom: 16px;
 }
 
 @media (max-width:767px) {
@@ -66,7 +66,7 @@
     width: 36px;
     height: fit-content;
     display: inline-block;
-    padding: 10px;
+    padding: 5px;
     border-radius: 50%;
     box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4);
     margin: 0 8px;
@@ -83,7 +83,7 @@
 
 .footer-dark .copyright {
     text-align: center;
-    padding-top: 24px;
+    padding-top: 5px;
     opacity: 0.8;
     font-size: 13px;
     margin-bottom: 0;

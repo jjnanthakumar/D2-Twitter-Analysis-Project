@@ -21,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '+l$^4q=4rue4x4ib$+x^z1spx=57j_wq$sn%-ux-_7r@6uk+ab'
+SECRET_KEY = 'YOUR OWN DJANGO SECRET HERE'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', 'nlptweets.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', '.herokuapp.com']
 
 
 # Application definition
@@ -34,10 +34,10 @@ ACCOUNT_UNIQUE_EMAIL = True
 
 EMAIL_BACKEND = "anymail.backends.mailjet.EmailBackend"
 ANYMAIL = {
-    "MAILJET_API_KEY": "853cdd57bbb3d4555bdbf947e2f68953",
-    "MAILJET_SECRET_KEY": "ccf918cb63ae6043526cae90b4ee0c36",
+    "MAILJET_API_KEY": "YOUR MAILJET API KEY",
+    "MAILJET_SECRET_KEY": "YOUR MAILJET API SECRET",
 }
-DEFAULT_FROM_EMAIL = 'nlptweets@gmail.com'
+DEFAULT_FROM_EMAIL = 'demo@gmail.com'
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
 INSTALLED_APPS = [
     'django.contrib.admin',

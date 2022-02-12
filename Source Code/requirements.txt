@@ -13,7 +13,7 @@ colorama==0.4.4
 cryptography==3.4.7
 defusedxml==0.7.1
 dj-database-url==0.5.0
-Django==3.1.7
+Django==3.1.14
 django-allauth==0.44.0
 django-anymail==8.2
 django-chartjs==2.2.1
